@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Add Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md px-6 py-4 flex justify-between items-center">
+        <!-- Logo -->
+        <div class="flex flex-col">
+            <div class="flex items-center space-x-2">
+                <!-- "Sonali" in blue -->
+                <span class="text-3xl font-bold text-blue-600">Sonali</span>
+                
+                <!-- "Intellect" in black -->
+                <span class="text-3xl font-bold text-black">Intellect</span>
+            </div>
+
+            <!-- Color Squares & Tagline (Below "Intellect") -->
+            <div class="flex items-center mt-1 ml-24"> <!-- Increased margin-left to move further right -->
+                <!-- Colored squares (Red, Yellow, Blue) -->
+                <div class="flex space-x-1">
+                    <div class="w-1.5 h-1.5 bg-red-400"></div>
+                    <div class="w-1.5 h-1.5 bg-yellow-400"></div>
+                    <div class="w-1.5 h-1.5 bg-blue-400"></div>
+                </div>
+                <!-- "Design for Digital" tagline -->
+                <span class="text-[10px] text-gray-500 ml-1">Design for Digital</span>
+            </div>
+        </div>
+      
+        <!-- Icons in Top-Right Corner -->
+        <div class="flex items-center space-x-4">
+            <button class="text-gray-600 hover:text-gray-900">
+                <i class="fas fa-search"></i> <!-- Search Icon -->
+            </button>
+            <button class="text-gray-600 hover:text-gray-900">
+                <i class="fas fa-cog"></i> <!-- Settings Icon -->
+            </button>
+            <button class="text-gray-600 hover:text-gray-900">
+                <i class="fas fa-user-circle text-xl"></i> <!-- Profile Icon -->
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header / Welcome Section -->
+    <div class="bg-[#4a235a] text-white py-6 px-6"> <!-- Changed background color to #800080 -->
+        <h1 class="text-2xl font-bold">Welcome Back</h1>
+        <p class="text-sm">Hey Admin! Wishing you a day filled with joy!</p>
+    </div>
+
+    <!-- Apps Grid -->
+    <div class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 justify-center"> <!-- 3 cards per row with gap -->
+            <!-- Attendance Card -->
+            <div class="bg-[#186a3b] p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow text-white w-48 h-40">
+                <i class="fas fa-calendar-check text-4xl text-blue-300"></i> <!-- Icon -->
+                <p class="mt-4 font-medium">Attendance</p>
+            </div>
+
+            <!-- Leave Card -->
+            <div class="bg-[#186a3b] p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow text-white w-48 h-40">
+                <i class="fas fa-umbrella-beach text-4xl text-green-300"></i> <!-- Icon -->
+                <p class="mt-4 font-medium">Leave</p>
+            </div>
+
+            <!-- Salary Card -->
+            <div class="bg-[#186a3b] p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow text-white w-48 h-40">
+                <i class="fas fa-money-bill-wave text-4xl text-yellow-300"></i> <!-- Icon -->
+                <p class="mt-4 font-medium">Salary</p>
+            </div>
+
+            <!-- Employee Card -->
+            <div class="bg-[#186a3b] p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow text-white w-48 h-40">
+                <i class="fas fa-users text-4xl text-purple-300"></i> <!-- Icon -->
+                <p class="mt-4 font-medium">Employee</p>
+            </div>
+
+            <!-- Tax Card -->
+            <div class="bg-[#186a3b] p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow text-white w-48 h-40">
+                <i class="fas fa-file-invoice-dollar text-4xl text-red-300"></i> <!-- Icon -->
+                <p class="mt-4 font-medium">Tax</p>
+            </div>
+
+            <!-- Provident Fund Card -->
+            <div class="bg-[#186a3b] p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow text-white w-48 h-40">
+                <i class="fas fa-piggy-bank text-4xl text-indigo-300"></i> <!-- Icon -->
+                <p class="mt-4 font-medium">Provident Fund</p>
+            </div>
+
+            <!-- Recruitment Card -->
+            <a href="http://127.0.0.1:5500/create_post.html" class="bg-[#186a3b] p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow text-white w-48 h-40">
+                <i class="fas fa-user-plus text-4xl text-teal-300"></i> <!-- Icon -->
+                <p class="mt-4 font-medium">Recruitment</p>
+            </a>
+
+            <!-- Performance Management Card -->
+            <div class="bg-[#186a3b] p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow text-white w-48 h-40">
+                <i class="fas fa-chart-line text-4xl text-orange-300"></i> <!-- Icon -->
+                <p class="mt-4 font-medium">Performance Management</p>
+            </div>
+
+            <!-- Dashboard Card -->
+            <div class="bg-[#186a3b] p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow text-white w-48 h-40">
+                <i class="fas fa-tachometer-alt text-4xl text-gray-300"></i> <!-- Icon -->
+                <p class="mt-4 font-medium">Dashboard</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

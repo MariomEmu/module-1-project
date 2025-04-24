@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Posting Module</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-4">Choose Posting Method</h2>
+    <div class="flex space-x-4 mb-4">
+      <button onclick="showSection('form')" class="bg-blue-500 text-white px-4 py-2 rounded-md">Form</button>
+      <button onclick="showSection('template')" class="bg-green-500 text-white px-4 py-2 rounded-md">Template</button>
+      <button onclick="showSection('flyer')" class="bg-purple-500 text-white px-4 py-2 rounded-md">Flyer</button>
+    </div>
+
+    <!-- Job Form -->
+    <div id="formSection" class="hidden">
+      <h2 class="text-xl font-bold mb-4">Create Job Posting</h2>
+      <form id="jobForm" class="space-y-4">
+        <label class="block font-medium text-gray-800">Position</label>
+        <input type="text" id="position" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"
+          placeholder="Enter job title" required>
+
+        <label class="block font-medium text-gray-800">Vacancy</label>
+        <input type="number" id="vacancy" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+
+        <label class="block font-medium text-gray-800">Job Context</label>
+        <textarea id="job_context" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"
+          required></textarea>
+
+        <label class="block font-medium text-gray-800">Job Requirements</label>
+        <textarea id="job_requirements" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"
+          required></textarea>
+
+        <label class="block font-medium text-gray-800">Employment Status</label>
+        <select id="employment_status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2">
+          <option>Full-time</option>
+          <option>Part-time</option>
+          <option>Contractual</option>
+          <option>Internship</option>
+        </select>
+
+        <label class="block font-medium text-gray-800">Educational Requirements</label>
+        <input type="text" id="educational_requirements"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+
+        <label class="block font-medium text-gray-800">Additional Requirements</label>
+        <input type="text" id="additional_requirements"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+
+        <label class="block font-medium text-gray-800">Experience</label>
+        <input type="text" id="experience" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+
+        <label class="block font-medium text-gray-800">Salary (Numeric/Text)</label>
+        <input type="text" id="salary" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2" required>
+
+        <label class="block font-medium text-gray-800">Other Benefits</label>
+        <textarea id="other_benefits" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"
+          required></textarea>
+
+        <label class="block font-medium text-gray-800">Application Deadline</label>
+        <input type="date" id="application_deadline" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"
+          required>
+
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md w-full">Post Job</button>
+      </form>
+    </div>
+
+    <!-- Job Template -->
+    <div id="templateSection" class="hidden">
+      <h2 class="text-xl font-bold mb-4">Use Job Template</h2>
+      <textarea id="template_content" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"
+        placeholder="Enter or select a template" required></textarea>
+      <button onclick="submitTemplate()" class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md">Submit
+        Template</button>
+    </div>
+
+    <!-- Job Flyer -->
+    <div id="flyerSection" class="hidden">
+      <h2 class="text-xl font-bold mb-4">Upload Job Flyer</h2>
+      <input type="file" id="flyer_upload" accept="image/*" class="block w-full rounded-md border-gray-300 shadow-sm p-2">
+      <button onclick="uploadFlyer()" class="bg-purple-500 text-white px-4 py-2 mt-4 rounded-md">Upload Flyer</button>
+    </div>
+
+    <!-- Job Platform Integration -->
+    <div class="mt-6">
+      <h2 class="text-xl font-bold mb-4">Integrate with Job Platforms</h2>
+      <select id="platform_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2"
+        onchange="togglePlatformSections()">
+        <option value="">Select Platform</option>
+        <option value="LinkedIn">LinkedIn</option>
+        <option value="BdJobs">BdJobs</option>
+        <option value="Company Website">Company Website</option>
+      </select>
+
+      <!-- LinkedIn Section -->
+      <div id="linkedinSection" class="hidden mt-4">
+        <label class="block text-gray-800">LinkedIn Integration</label>
+        <input type="checkbox" id="linkedin" class="mr-2"> LinkedIn
+      </div>
+
+      <!-- BdJobs Section -->
+      <div id="bdjobsSection" class="hidden mt-4">
+        <label class="block text-gray-800">BdJobs Integration</label>
+        <input type="checkbox" id="bdjobs" class="mr-2"> BdJobs
+      </div>
+
+      <!-- Company Website Section -->
+      <div id="companyWebsiteSection" class="hidden mt-4">
+        <label class="block text-gray-800">Company Website Integration</label>
+        <input type="checkbox" id="companyWebsite" class="mr-2"> Company Website
+      </div>
+
+      <!-- Select All Button -->
+      <button onclick="selectAllPlatforms()" class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md">Select
+        All</button>
+
+      <!-- Integrate Button -->
+      <button onclick="submitIntegration()"
+        class="bg-yellow-500 text-white px-4 py-2 mt-4 rounded-md w-full">Integrate</button>
+    </div>
+
+    <!-- Job List Section -->
+    <div class="mt-6">
+      <h2 class="text-xl font-bold mb-4">Job Listings</h2>
+      <div class="flex space-x-4 mb-4">
+        <button onclick="fetchFormJobs()" class="bg-blue-500 text-white px-4 py-2 rounded-md">View Form Jobs</button>
+        <button onclick="fetchTemplateJobs()" class="bg-green-500 text-white px-4 py-2 rounded-md">View Template Jobs</button>
+        <button onclick="fetchFlyerJobs()" class="bg-purple-500 text-white px-4 py-2 rounded-md">View Flyer Jobs</button>
+      </div>
+      <div id="jobList" class="space-y-4">
+        <!-- Job listings will be dynamically inserted here -->
+      </div>
+    </div>
+
+    <!-- Modal for viewing flyers -->
+    <div id="flyerModal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4">
+      <div class="bg-white rounded-lg p-4 max-w-2xl w-full">
+        <img id="modalFlyerImage" src="" alt="Flyer" class="w-full h-auto rounded-md">
+        <button onclick="closeModal()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md">Close</button>
+      </div>
+    </div>
+
+    <script>
+      // Function to toggle the visibility of platform sections
+      function togglePlatformSections() {
+        const selectedValue = document.getElementById('platform_name').value;
+
+        // Hide all sections first
+        document.getElementById('linkedinSection').classList.add('hidden');
+        document.getElementById('bdjobsSection').classList.add('hidden');
+        document.getElementById('companyWebsiteSection').classList.add('hidden');
+
+        // Show the corresponding section based on the selected platform
+        if (selectedValue === 'LinkedIn') {
+          document.getElementById('linkedinSection').classList.remove('hidden');
+        } else if (selectedValue === 'BdJobs') {
+          document.getElementById('bdjobsSection').classList.remove('hidden');
+        } else if (selectedValue === 'Company Website') {
+          document.getElementById('companyWebsiteSection').classList.remove('hidden');
+        }
+      }
+
+      // Function to select all platforms and show visual tick marks
+      function selectAllPlatforms() {
+        // Check all checkboxes
+        document.getElementById('linkedin').checked = true;
+        document.getElementById('bdjobs').checked = true;
+        document.getElementById('companyWebsite').checked = true;
+
+        // Show all sections when Select All is clicked
+        document.getElementById('linkedinSection').classList.remove('hidden');
+        document.getElementById('bdjobsSection').classList.remove('hidden');
+        document.getElementById('companyWebsiteSection').classList.remove('hidden');
+
+        // Visually indicate that the checkboxes are selected (blue background on selected checkboxes)
+        document.getElementById('linkedin').classList.add('checked:bg-blue-500');
+        document.getElementById('bdjobs').classList.add('checked:bg-blue-500');
+        document.getElementById('companyWebsite').classList.add('checked:bg-blue-500');
+      }
+
+      // Function to handle the integration submission for selected platforms
+      function submitIntegration() {
+        const selectedPlatforms = [];
+
+        // Check if any individual checkbox is selected and add to selectedPlatforms
+        if (document.getElementById('linkedin').checked) {
+          selectedPlatforms.push('LinkedIn');
+        }
+        if (document.getElementById('bdjobs').checked) {
+          selectedPlatforms.push('BdJobs');
+        }
+        if (document.getElementById('companyWebsite').checked) {
+          selectedPlatforms.push('Company Website');
+        }
+
+        // If only one platform is selected, show the success message for that platform
+        if (selectedPlatforms.length === 1) {
+          showSuccessMessage(`${selectedPlatforms[0]} integration successful!`);
+        }
+        // If more than one platform is selected (like Select All), show the success message for all selected platforms
+        else if (selectedPlatforms.length > 1) {
+          showSuccessMessage(`Integration successful with: ${selectedPlatforms.join(', ')}`);
+        }
+        // If no platform is selected, show a message to select a platform
+        else {
+          showSuccessMessage('Please select a platform to integrate.');
+        }
+      }
+
+      // Function to display success message
+      function showSuccessMessage(message) {
+        alert(message);
+      }
+
+      // Function to show/hide sections based on the button clicked
+      function showSection(sectionId) {
+        // Hide all sections
+        document.getElementById("formSection").classList.add("hidden");
+        document.getElementById("templateSection").classList.add("hidden");
+        document.getElementById("flyerSection").classList.add("hidden");
+
+        // Show the selected section
+        if (sectionId === "form") {
+          document.getElementById("formSection").classList.remove("hidden");
+        } else if (sectionId === "template") {
+          document.getElementById("templateSection").classList.remove("hidden");
+        } else if (sectionId === "flyer") {
+          document.getElementById("flyerSection").classList.remove("hidden");
+        }
+      }
+
+      // Function to fetch and display jobs posted via forms
+      async function fetchFormJobs() {
+        try {
+          const response = await fetch("http://127.0.0.1:8000/getjobs/");
+          if (!response.ok) {
+            throw new Error("Failed to fetch form jobs");
+          }
+          const jobs = await response.json();
+          displayJobs(jobs, 'form');
+        } catch (error) {
+          console.error("Error fetching form jobs:", error);
+        }
+      }
+
+      // Function to fetch and display jobs created using templates
+      async function fetchTemplateJobs() {
+        try {
+          const response = await fetch("http://127.0.0.1:8000/gettempjobs/");
+          if (!response.ok) {
+            throw new Error("Failed to fetch template jobs");
+          }
+          const jobs = await response.json();
+          displayJobs(jobs, 'template');
+        } catch (error) {
+          console.error("Error fetching template jobs:", error);
+        }
+      }
+
+      // Function to upload flyer
+      async function uploadFlyer() {
+        const fileInput = document.getElementById("flyer_upload");
+        const file = fileInput.files[0];
+
+        if (!file) {
+          alert("Please select an image to upload.");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/upload-flyer/", {
+            method: "POST",
+            body: formData,
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to upload flyer");
+          }
+
+          const result = await response.json();
+          alert("Flyer uploaded successfully!");
+          console.log(result); // Log the response from the server
+        } catch (error) {
+          alert("Error uploading flyer: " + error.message);
+          console.error(error);
+        }
+      }
+
+      // Function to fetch and display flyers
+      async function fetchFlyerJobs() {
+        try {
+          const response = await fetch("http://127.0.0.1:8000/get-flyers/");
+          if (!response.ok) {
+            throw new Error("Failed to fetch flyer jobs");
+          }
+          const flyers = await response.json();
+          displayFlyers(flyers);
+        } catch (error) {
+          console.error("Error fetching flyer jobs:", error);
+        }
+      }
+
+      // Function to display jobs in the jobList section
+      function displayJobs(jobs, type) {
+        const jobList = document.getElementById("jobList");
+        jobList.innerHTML = ""; // Clear existing job listings
+
+        jobs.forEach(job => {
+          const jobElement = document.createElement("div");
+          jobElement.className = "bg-gray-50 p-4 rounded-lg shadow-sm";
+
+          if (type === 'form') {
+            // Display form jobs with specific fields
+            jobElement.innerHTML = `
+              <h3 class="text-lg font-semibold">${job.position}</h3>
+              <p class="text-sm text-gray-600">Vacancy: ${job.vacancy}</p>
+              <p class="text-sm text-gray-600">Employment Status: ${job.employment_status}</p>
+              <p class="text-sm text-gray-600">Application Deadline: ${job.application_deadline}</p>
+            `;
+          } else if (type === 'template') {
+            // Display template jobs (only template_content)
+            jobElement.innerHTML = `
+              <p class="text-gray-800">${job.template_content}</p>
+            `;
+          }
+
+          jobList.appendChild(jobElement);
+        });
+      }
+
+      // Function to display flyers
+      function displayFlyers(flyers) {
+        const jobList = document.getElementById("jobList");
+        jobList.innerHTML = ""; // Clear existing content
+
+        flyers.forEach(flyer => {
+          const flyerElement = document.createElement("div");
+          flyerElement.className = "bg-gray-50 p-4 rounded-lg shadow-sm cursor-pointer";
+          flyerElement.innerHTML = `
+            <img src="http://127.0.0.1:8000${flyer.flyer_id}" alt="Flyer" class="w-full h-auto rounded-md">
+          `;
+
+          // Add click event to open the modal
+          flyerElement.addEventListener("click", () => openModal(`http://127.0.0.1:8000${flyer.flyer_id}`));
+
+          jobList.appendChild(flyerElement);
+        });
+      }
+
+      // Function to open the modal and display the clicked flyer
+      function openModal(flyerUrl) {
+        const modal = document.getElementById("flyerModal");
+        const modalImage = document.getElementById("modalFlyerImage");
+        modalImage.src = flyerUrl; // Set the image source
+        modal.classList.remove("hidden"); // Show the modal
+      }
+
+      // Function to close the modal
+      function closeModal() {
+        const modal = document.getElementById("flyerModal");
+        modal.classList.add("hidden"); // Hide the modal
+      }
+    </script>
+
+    <script>
+      document.getElementById("jobForm").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Capture form data
+        const jobData = {
+          position: document.getElementById("position").value,
+          vacancy: parseInt(document.getElementById("vacancy").value),
+          job_context: document.getElementById("job_context").value,
+          job_requirements: document.getElementById("job_requirements").value,
+          employment_status: document.getElementById("employment_status").value,
+          educational_requirements: document.getElementById("educational_requirements").value,
+          additional_requirements: document.getElementById("additional_requirements").value,
+          experience: document.getElementById("experience").value,
+          salary: parseInt(document.getElementById("salary").value),
+          other_benefits: document.getElementById("other_benefits").value,
+          application_deadline: document.getElementById("application_deadline").value,
+        };
+
+        try {
+          // Send the data to the FastAPI backend
+          const response = await fetch("http://127.0.0.1:8000/jobs/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(jobData),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to post job");
+          }
+
+          const result = await response.json();
+          alert("Job posted successfully!");
+          console.log(result); // Log the response from the server
+          document.getElementById("jobForm").reset();  // Clear the form fields
+
+          // Refresh the job list after posting a new job
+          fetchFormJobs();
+        } catch (error) {
+          alert("Error posting job: " + error.message);
+          console.error(error);
+        }
+      });
+    </script>
+
+    <script>
+      // Function to submit template
+      async function submitTemplate() {
+        const templateContent = document.getElementById("template_content").value;
+
+        if (!templateContent) {
+          alert("Please enter template content.");
+          return;
+        }
+
+        const templateData = {
+          template_name: "Custom Template", // You can allow users to input a name if needed
+          template_content: templateContent,
+        };
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/templates/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(templateData),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to submit template");
+          }
+
+          const result = await response.json();
+          alert("Template submitted successfully!");
+          console.log(result); // Log the response from the server
+          document.getElementById("template_content").value = "";
+
+          // Refresh the job list after submitting a new template
+          fetchTemplateJobs();
+        } catch (error) {
+          alert("Error submitting template: " + error.message);
+          console.error(error);
+        }
+      }
+    </script>
+  </div>
+</body>
+</html>

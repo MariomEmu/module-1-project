@@ -1,0 +1,2 @@
+cd "Job Posting Backend"
+python -m uvicorn main:app --reload --port 5500

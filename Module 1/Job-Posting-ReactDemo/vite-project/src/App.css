@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  overflow: hidden; /* Prevent global scrolling */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: #ffffff;
+}
+
+/* Fixed Header */
+header {
+  height: 60px; /* Fixed height */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  position: fixed; /* Changed from sticky to fixed */
+  top: 0;
+  left: 0;
+  z-index: 100;
+  flex-shrink: 0; /* Prevent shrinking */
+  color: #000000;
+}
+
+.main-layout {
+  display: flex;
+  height: calc(100vh - 60px); /* Account for header */
+  width: 100%;
+  margin-top: 60px; /* Offset for fixed header */
+}
+
+/* Fixed Left Panel */
+.left-panel {
+  width: 240px; /* Fixed width */
+  height: 100%; /* Full remaining height */
+  padding: 20px;
+  border-right: 1px solid #e9dcdc;
+  background-color: #ffffff;
+  overflow-y: auto;
+  flex-shrink: 0; /* Prevent shrinking */
+  color: #000000;
+}
+
+/* Fixed Right Panel */
+.right-panel {
+  width: 300px; /* Fixed width */
+  height: 100%; /* Full remaining height */
+  padding: 20px;
+  border-left: 1px solid #e9dcdc;
+  background-color: #ffffff;
+  overflow-y: auto;
+  flex-shrink: 0; /* Prevent shrinking */
+  color: #000000;
+}
+
+/* Hero Section with Fixed Dimensions */
+/* Hero Section with Fixed Dimensions */
+.hero-section {
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+  padding: 20px;
+  background-color: #ffffff;
+  overflow-y: auto;
+  color: #000000;
+
+  /* For Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #d3cece transparent;
+}
+
+/* For Chrome, Edge, and Safari */
+.hero-section::-webkit-scrollbar {
+  width: 6px; /* thinner scrollbar */
+}
+
+.hero-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.hero-section::-webkit-scrollbar-thumb {
+  background-color: #ffffff; /* white scrollbar */
+  border-radius: 10px;
+}
+
+
+.recruitment-hero {
+  flex: 1;
+  height: 100%; /* Full remaining height */
+  min-width: 0; /* Allows proper shrinking */
+  padding: 20px;
+  background-color: #ffffff;
+  overflow-y: auto; /* Scroll only content area */
+  color: #000000;
+}
+
+/* Recruitment Hero Scrollbar Styles */
+
+/* For Firefox */
+.recruitment-hero {
+  scrollbar-width: thin;
+  scrollbar-color: #d3cece transparent;
+}
+
+/* For Chrome, Edge, and Safari */
+.recruitment-hero::-webkit-scrollbar {
+  width: 6px;
+}
+
+.recruitment-hero::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.recruitment-hero::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+
